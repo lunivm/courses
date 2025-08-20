@@ -33,6 +33,26 @@ const socials = [
 ];
 
 const Header = () => {
+  const [y, setY] = React.useState(window.scrollY);
+  const [shouldShowHeader, setShouldShowHeader] = React.useState(true);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > y) {
+        // Scrolling down
+        setShouldShowHeader(false);
+      } else {
+        // Scrolling up
+        setShouldShowHeader(true);
+      }
+      setY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [y]);
+
   const handleClick = (anchor) => () => {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
@@ -50,7 +70,7 @@ const Header = () => {
       top={0}
       left={0}
       right={0}
-      translateY={0}
+      transform={shouldShowHeader ? "translateY(0)" : "translateY(-200px)"}
       transitionProperty="transform"
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
