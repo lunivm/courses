@@ -14,7 +14,7 @@ const Card = ({ title, description, imageSrc }) => {
         <Text color="gray.600" py={4}>{description}</Text>
 
         <HStack pt={2} spacing={2} color="gray.800" cursor="pointer">
-          <Text fontWeight="bold">See more</Text>
+          <Text fontSize="xs">See more</Text>
           <FontAwesomeIcon icon={faArrowRight} size="sm" />
         </HStack>
       </VStack>
